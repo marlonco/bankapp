@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="initialise-load-account-data" author="mco">
+        <loadData file="db/account/changelog/data/account-data-v1.csv"
+                  quotchar="'"
+                  schemaName="public"
+                  tableName="account">
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="type" type="string"/>
+            <column name="currency" type="string"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="initialise-load-transaction-data" author="mco">
+        <loadData file="db/account/changelog/data/transaction-data-v1.csv"
+                  quotchar="'"
+                  schemaName="public"
+                  tableName="transaction">
+            <column name="account_no" type="numeric"/>
+            <column name="value_date" type="date"/>
+            <column name="credit" type="boolean"/>
+            <column name="amount" type="numeric"/>
+            <column name="balance_amount" type="numeric"/>
+            <column name="narrative" type="string"/>
+        </loadData>
+
+    </changeSet>
+
+</databaseChangeLog>

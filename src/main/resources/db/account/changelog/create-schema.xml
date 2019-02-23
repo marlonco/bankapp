@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="initialise-account-table" author="mco">
+        <comment>Create the Account table</comment>
+        <createTable tableName="account">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="varchar(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="current_balance" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="balance_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="initialise-transaction-table" author="mco">
+        <comment>Create the Transaction table</comment>
+        <createTable tableName="transaction">
+            <column name="id" type="identity">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="account_no" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="credit" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="narrative" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="account_no"
+                                 baseTableName="transaction"
+                                 constraintName="fk_transaction_account"
+                                 referencedColumnNames="id"
+                                 referencedTableName="account"/>
+    </changeSet>
+
+</databaseChangeLog>

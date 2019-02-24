@@ -21,8 +21,8 @@ To build and launch the application.
 mvn clean install spring-boot:run
 ```
 
-* Note that the unit test and may take some time to execute as it tests several layers of the application. (e.g. Controller)
-* If you have already once the test and ultimately confident about your application, launch it without running the test.
+* Note that the unit test may take additional time to execute as it tests several layers of the application. (e.g. Controller)
+* If you have already executed test at least once and ultimately confident, launch it without running the test.
 
 ```
 mvn clean install spring-boot:run -DskipTests

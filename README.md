@@ -14,7 +14,7 @@ What things you need to install the software and how to install them
 
 To build and launch the application.
 
-* Clone from (https://github.com/marlonco/bankapp)
+* Clone from (https://github.com/marlonco/bankapp.git)
 * Run this maven command from the console 
 
 ```

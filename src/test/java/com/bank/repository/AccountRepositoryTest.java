@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.env.Environment;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
@@ -16,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItemInArray;
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -23,6 +26,7 @@ import static org.hamcrest.Matchers.is;
  */
 @ExtendWith(SpringExtension.class)
 @Import(InitTestDatabase.class)
+@ActiveProfiles("test")
 @DataJpaTest
 public class AccountRepositoryTest {
 
@@ -32,8 +36,13 @@ public class AccountRepositoryTest {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private Environment environment;
+
     @Test
     public void testFindAll() {
+        assertThat(environment.getActiveProfiles(), hasItemInArray("test"));
+
         Account account = new Account();
         account.setId(12345);
         account.setName("AUCurrent");
